@@ -8,7 +8,11 @@ namespace Blind75
 {
     internal class Blind75
     {
-        /*All tasks in this project were completed independently in C# without using the Internet.*/
+        /*
+        All tasks in this project were completed independently in C# without using the Internet.
+        https://www.techinterviewhandbook.org/best-practice-questions/
+        */
+
 
         //Two-Sum
         public int[] TwoSum(int[] nums, int target)
