@@ -71,5 +71,31 @@ namespace Blind75
             }
             return true;
         }
+        //Valid-parentheses
+        public bool IsValid(string s)
+        {
+            Stack<char> stack = new Stack<char>();
+
+            Dictionary<char, char> mappings = new Dictionary<char, char>();
+            mappings.Add(')', '(');
+            mappings.Add('}', '{');
+            mappings.Add(']', '[');
+
+            foreach (char c in s)
+            {
+                if (mappings.ContainsValue(c))
+                {
+                    stack.Push(c);
+                }
+                else if (mappings.ContainsKey(c))
+                {
+                    if (stack.Count == 0 || stack.Pop() != mappings[c])
+                    {
+                        return false;
+                    }
+                }
+            }
+            return stack.Count == 0;
+        }
     }
 }
