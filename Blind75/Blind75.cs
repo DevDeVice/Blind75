@@ -52,5 +52,24 @@ namespace Blind75
             }
             return profit;
         }
+        //Valid-anagram
+        public bool IsAnagram(string s, string t)
+        {
+            if (s.Length != t.Length)
+                return false;
+            int[] map = new int[26];
+            foreach (var i in s)
+            {
+                map[i - 'a']++;
+            }
+            foreach (var i in t)
+            {
+                if (map[i - 'a'] <= 0)
+                    return false;
+                else
+                    map[i - 'a']--;
+            }
+            return true;
+        }
     }
 }
