@@ -29,10 +29,28 @@ namespace Blind75
             }
             return [0, 0];
         }
-        //Contains Duplicate
+        //Contains-Duplicate
         public bool ContainsDuplicate(int[] nums)
         {
             return nums.Count() != nums.Distinct().Count();
+        }
+        //Best-time-to-buy-and-sell-stock
+        public int MaxProfit(int[] prices)
+        {
+            int buy = prices[0];
+            int profit = 0;
+            for (int i = 1; i < prices.Length; i++)
+            {
+                if (prices[i] < buy)
+                {
+                    buy = prices[i];
+                }
+                else if (prices[i] - buy > profit)
+                {
+                    profit = prices[i] - buy;
+                }
+            }
+            return profit;
         }
     }
 }
