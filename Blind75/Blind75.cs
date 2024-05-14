@@ -13,7 +13,6 @@ namespace Blind75
         https://www.techinterviewhandbook.org/best-practice-questions/
         */
          
-
         //Two-Sum
         public int[] TwoSum(int[] nums, int target)
         {
@@ -128,26 +127,46 @@ namespace Blind75
                     this.next = next;
                 }
         }
-        public class Solution
+        public ListNode ReverseList(ListNode head)
         {
-            public ListNode ReverseList(ListNode head)
+            ListNode prev = null;
+            ListNode current = head;
+            ListNode nextNode = null;
+
+            while (current != null)
             {
-                ListNode prev = null;
-                ListNode current = head;
-                ListNode nextNode = null;
-
-                while (current != null)
-                {
-                    nextNode = current.next; // Save the next node
-                    current.next = prev; // Reverse the link
-                    prev = current; // Move pointers one position ahead
-                    current = nextNode;
-                }
-
-                return prev;
+                nextNode = current.next; // Save the next node
+                current.next = prev; // Reverse the link
+                prev = current; // Move pointers one position ahead
+                current = nextNode;
             }
+
+            return prev;
         }
         //Linked-list-cycle
+        public class ListNode2 {
+            public int val;
+            public ListNode2 next;
+            public ListNode2(int x) {
+                val = x;
+                next = null;
+            }
+        }
+        public bool HasCycle(ListNode2 head)
+        {
+            HashSet<ListNode2> visited = new HashSet<ListNode2>();
+
+            while (head != null)
+            {
+                if (visited.Contains(head))
+                {
+                    return true;
+                }
+                visited.Add(head);
+                head = head.next;
+            }
+            return false;
+        }
     }
 }
  
