@@ -12,7 +12,7 @@ namespace Blind75
         All tasks in this project were completed independently in C# without using the Internet.
         https://www.techinterviewhandbook.org/best-practice-questions/
         */
-         
+          
         //Two-Sum
         public int[] TwoSum(int[] nums, int target)
         {
@@ -27,7 +27,7 @@ namespace Blind75
                 }
             }
             return [0, 0];
-        }
+        }  
         //Contains-Duplicate
         public bool ContainsDuplicate(int[] nums)
         {
