@@ -116,6 +116,75 @@ namespace Blind75
             }
             return maxSum;
         }
+        //Product-of-array-except-self
+        public int[] ProductExceptSelf(int[] nums)
+        {
+            int n = nums.Length;
+            int[] result = new int[n];
+            int[] leftProducts = new int[n];
+            int[] rightProducts = new int[n];
+
+            leftProducts[0] = 1;
+            for (int i = 1; i < n; i++)
+            {
+                leftProducts[i] = leftProducts[i - 1] * nums[i - 1];
+            }
+
+            rightProducts[n - 1] = 1;
+            for (int i = n - 2; i >= 0; i--)
+            {
+                rightProducts[i] = rightProducts[i + 1] * nums[i + 1];
+            }
+
+            // Wynikowy iloczyn bez bieżącego elementu
+            for (int i = 0; i < n; i++)
+            {
+                result[i] = leftProducts[i] * rightProducts[i];
+            }
+
+            return result;
+        }
+        //3sum
+        public IList<IList<int>> ThreeSum(int[] nums)
+        {
+            Array.Sort(nums);
+            var result = new List<IList<int>>();
+
+            for (int i = 0; i < nums.Length - 2; i++)
+            {
+                if (i > 0 && nums[i] == nums[i - 1])
+                {
+                    continue; // Pomiń duplikaty
+                }
+
+                int left = i + 1;
+                int right = nums.Length - 1;
+
+                while (left < right)
+                {
+                    int sum = nums[i] + nums[left] + nums[right];
+
+                    if (sum == 0)
+                    {
+                        result.Add(new List<int> { nums[i], nums[left], nums[right] });
+                        while (left < right && nums[left] == nums[left + 1]) left++; // Pomiń duplikaty
+                        while (left < right && nums[right] == nums[right - 1]) right--; // Pomiń duplikaty
+                        left++;
+                        right--;
+                    }
+                    else if (sum < 0)
+                    {
+                        left++;
+                    }
+                    else
+                    {
+                        right--;
+                    }
+                }
+            }
+            return result;
+        }
+
         //Reverse-linked-list
         public class ListNode
             {
@@ -178,7 +247,6 @@ namespace Blind75
                this.right = right;
            }
        }
-
         public TreeNode InvertTree(TreeNode root)
         {
             if (root == null)
@@ -191,6 +259,7 @@ namespace Blind75
 
             return root;
         }
+
     }
 }
  
