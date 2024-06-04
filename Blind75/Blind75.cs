@@ -184,6 +184,94 @@ namespace Blind75
             }
             return result;
         }
+        //Merge-intervals
+        public int[][] Merge(int[][] intervals)
+        {
+            if (intervals.Length == 0) return new int[0][];
+            Array.Sort(intervals, (a, b) => a[0].CompareTo(b[0]));
+
+            var merged = new List<int[]>();
+            var currentInterval = intervals[0];
+            merged.Add(currentInterval);
+
+            foreach (var interval in intervals)
+            {
+                int currentEnd = currentInterval[1];
+                int nextStart = interval[0];
+                int nextEnd = interval[1];
+
+                if (currentEnd >= nextStart)
+                { // Przedziały się nakładają
+                    currentInterval[1] = Math.Max(currentEnd, nextEnd);
+                }
+                else
+                { // Przedziały się nie nakładają, przejdź do następnego
+                    currentInterval = interval;
+                    merged.Add(currentInterval);
+                }
+            }
+
+            return merged.ToArray();
+        }
+        //Group-anagrams
+        public IList<IList<string>> GroupAnagrams(string[] strs)
+        {
+            var dict = new Dictionary<string, List<string>>();
+
+            foreach (var str in strs)
+            {
+                // Konwertuj ciąg do tablicy znaków, posortuj, a następnie wróć do ciągu
+                var charArray = str.ToCharArray();
+                Array.Sort(charArray);
+                var sortedStr = new string(charArray);
+
+                // Jeśli posortowany ciąg nie istnieje w słowniku, dodaj go
+                if (!dict.ContainsKey(sortedStr))
+                {
+                    dict[sortedStr] = new List<string>();
+                }
+                // Dodaj oryginalny ciąg do listy anagramów
+                dict[sortedStr].Add(str);
+            }
+
+            // Konwertuj wartości słownika do formatu wymaganego przez wynik
+            var result = new List<IList<string>>();
+            foreach (var entry in dict)
+            {
+                result.Add(entry.Value);
+            }
+            return result;
+        }
+        //Maximum-product-subarray TO CHECK
+        public int MaxProduct(int[] nums)
+        {
+            if (nums == null || nums.Length == 0)
+            {
+                return 0;
+            }
+
+            int maxProduct = nums[0];
+            int minProduct = nums[0];
+            int result = nums[0];
+
+            for (int i = 1; i < nums.Length; i++)
+            {
+                int current = nums[i];
+                if (current < 0)
+                {
+                    var temp = maxProduct;
+                    maxProduct = minProduct;
+                    minProduct = temp;
+                }
+
+                maxProduct = Math.Max(current, maxProduct * current);
+                minProduct = Math.Min(current, minProduct * current);
+
+                result = Math.Max(result, maxProduct);
+            }
+
+            return result;
+        }
 
         //Reverse-linked-list
         public class ListNode
